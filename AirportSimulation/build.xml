@@ -6,10 +6,14 @@
 <!-- Commands such as Run, Debug, and Test only use this build script if -->
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
-<!-- in the project's Project Properties dialog box.-->
-<project name="AirportSimulation" default="default" basedir=".">
+<!-- in the project's Project Properties dialog box.--> 
+<project xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1"
+        xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3"
+        name="SpectrumToSimulator" default="default" basedir=".">
     <description>Builds, tests, and runs the project AirportSimulation.</description>
     <import file="nbproject/build-impl.xml"/>
+        
+    
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -70,4 +74,67 @@
     nbproject/build-impl.xml file. 
 
     -->
+    
+    <property environment="env"/>
+
+    <path id="cobertura.classpath">
+        <fileset dir="lib">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+    <target name="-pre-compile-test">
+        <delete dir="${build.instrumented.dir}" />
+        <delete dir="${build.report.cobertura.dir}" />
+        <mkdir dir="${build.instrumented.dir}" />
+        <mkdir dir="${build.report.cobertura.dir}" />
+        <cobertura-instrument todir="${build.instrumented.dir}">
+            <fileset dir="${build.classes.dir}">
+                <include name="**/*.class"/>
+                <exclude name="**/*Test.class"/>
+                <exclude name="**/*Frame.class"/>
+                <exclude name="**/*Frame*.class"/>
+            </fileset>
+        </cobertura-instrument>
+    </target>
+
+    <target name="-post-test-run" depends="-do-test-run">
+        <!-- You can disable the html portion if you are using the hudson plugin and rely on the xml -->
+        <cobertura-report format="html" srcdir="${src.dir}" destdir="${build.report.cobertura.dir}">
+            <fileset dir="${src.dir}">
+                <include name="**/*.java"/>
+            </fileset>
+        </cobertura-report>
+        <!-- Used by the hudson plug-in -->
+        <cobertura-report format="xml" srcdir="${src.dir}" destdir="${build.report.cobertura.dir}">
+            <fileset dir="${src.dir}">
+                <include name="**/*.java"/>
+            </fileset>
+        </cobertura-report>
+        <delete file="cobertura.ser" />
+    </target>
+
+    <target depends="init,compile-test-single" name="run-test-with-main">
+        <fail unless="run.class">Must select one file in the IDE or set run.class</fail>
+        <j2seproject1:java classname="${run.class}" classpath="${run.test.classpath}">
+            <customize>
+                <arg line="${application.args}"/>
+            </customize>
+        </j2seproject1:java>
+    </target>
+
+    <target name="-post-compile">
+        <javadoc
+            sourcepath="${src.dir}"
+            destdir="dist/doc"
+            encoding="utf-8" >
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javadoc>
+    </target>
+    
 </project>
