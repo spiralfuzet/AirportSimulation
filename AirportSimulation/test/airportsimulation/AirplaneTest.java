@@ -6,12 +6,12 @@
 package airportsimulation;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author Rendszergazda
+ * @author tothm
  */
 public class AirplaneTest {
 
@@ -19,8 +19,8 @@ public class AirplaneTest {
     public void shouldCreateAirplane() {
         Airplane airplane = new Airplane(100.0);
         airplane.move(4.0);
-        
+
         assertThat(airplane.getActFuelLevel(), is(60.0));
     }
-    
+
 }

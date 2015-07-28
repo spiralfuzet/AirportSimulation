@@ -7,10 +7,10 @@ package airportsimulation;
 
 /**
  *
- * @author Rendszergazda
+ * @author tothm
  */
 public class Airplane {
-    
+
     private final Double fuelTankCapacity;
     private Double actFuelLevel;
     private final Double consumption = 10.0;
@@ -19,7 +19,7 @@ public class Airplane {
         this.fuelTankCapacity = fuelTankCapacity;
         this.actFuelLevel = fuelTankCapacity;
     }
-    
+
     public void move(Double distance) {
         actFuelLevel -= consumption * distance;
     }
@@ -27,5 +27,5 @@ public class Airplane {
     public Double getActFuelLevel() {
         return actFuelLevel;
     }
-    
+
 }
