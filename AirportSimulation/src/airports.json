@@ -1,0 +1,24 @@
+{
+    "Airports" :
+    {
+        "BUD" :
+        {
+            "aliasName" : "BUD/LHBP Budapest Liszt Ferenc International Airport",
+            "Country" : "Hungary",
+            "maxCapacityAircrafts" : "75",
+            "actCapacityAircrafts" : "0",
+            "maxCapacityPassangers" : "4000",
+            "countRunways" : "2"
+          
+        },
+        "YUL" :
+        {
+            "aliasName" : "YUL/CYUL Montreal Pierre Elliott Trudeau Airport",
+            "Country" : "Canada",
+            "maxCapacityAircrafts" : "50",
+            "actCapacityAircrafts" : "0",
+            "maxCapacityPassangers" : "2500",
+            "countRunways" : "2"
+        }
+    }
+}
