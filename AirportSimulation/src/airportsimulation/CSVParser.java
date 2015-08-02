@@ -21,7 +21,7 @@ public final class CSVParser {
     private Map<String, Map> dataMap = new HashMap<>();
     private List<String[]> dataList = new ArrayList<>();
     
-    public CSVParser(String _fileName, boolean _hasHeader, String _delimiter) {
+    public CSVParser(String _fileName, boolean _hasHeader, String _delimiter) throws FileNotFoundException {
         fileName = _fileName;
         hasHeader = _hasHeader;
         delimiter = _delimiter;
@@ -31,11 +31,12 @@ public final class CSVParser {
             this.readFile();
         } catch (FileNotFoundException e) {
             System.out.println("ERROR CSV file not found: " + fileName);
+            throw e;
         }
     }
     
     public CSVParser(BufferedReader reader, boolean _hasHeader, String _delimiter) {
-        fileReader =  reader;
+        fileReader = reader;
         hasHeader = _hasHeader;
         delimiter = _delimiter;
         this.readFile();
