@@ -13,39 +13,41 @@ import java.util.Map;
  *
  * @author dobos
  */
-public class CSVParser {
-    private final String fileName;
-    private String delimiter = ";";
+public final class CSVParser {
+    private String fileName = "";
+    private BufferedReader fileReader = null;
+    private String delimiter;
     private final boolean hasHeader;
-    private Map<String, Map> dataMap = new HashMap<String, Map>();
-    private List<String[]> dataList = new ArrayList<String[]>();
-    
-    public CSVParser(String _fileName, boolean _hasHeader) {
-        fileName = _fileName;
-        hasHeader = _hasHeader;
-        this.readFile();
-    }
+    private Map<String, Map> dataMap = new HashMap<>();
+    private List<String[]> dataList = new ArrayList<>();
     
     public CSVParser(String _fileName, boolean _hasHeader, String _delimiter) {
         fileName = _fileName;
         hasHeader = _hasHeader;
         delimiter = _delimiter;
+        try
+        {   
+            fileReader = new BufferedReader(new FileReader(fileName));
+            this.readFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR CSV file not found: " + fileName);
+        }
+    }
+    
+    public CSVParser(BufferedReader reader, boolean _hasHeader, String _delimiter) {
+        fileReader =  reader;
+        hasHeader = _hasHeader;
+        delimiter = _delimiter;
         this.readFile();
     }
     
-    public void setDelimiter (String _delimiter) {
-        delimiter = _delimiter;
-    }
     public void readFile() {
-        
-        BufferedReader fileReader = null;
+
         String line = "";
         String header = "";
        
         try
         {   
-            fileReader = new BufferedReader(new FileReader(fileName));
-            
             if (hasHeader) {
                 header = fileReader.readLine();
             }
@@ -55,21 +57,22 @@ public class CSVParser {
                 String[] records = line.split(delimiter);
 
                 addToList(records);
-                addToMap(header, records);
+                if (hasHeader) {
+                    addToMap(header, records);
+                }
             }
-        }
-        catch (FileNotFoundException e) {
-            System.out.println("ERROR CSV file not found: " + fileName);
         }
         catch (Exception e) {
             System.out.println("ERROR while reading CSV File: " + fileName);
         }
         finally
         {
-            try {
-                fileReader.close();
-            } catch (IOException e) {
-                System.out.println("ERROR while closing CSVParser");
+            if (fileReader != null) {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    System.out.println("ERROR while closing CSVParser");
+                }
             }
         }
     }
@@ -83,13 +86,13 @@ public class CSVParser {
     }
     
     private void addToMap(String header, String[] data) {
-        Map<String, String> smallmap = new HashMap<String, String>();
+        Map<String, String> innerMap = new HashMap<String, String>();
         String[] headers = header.split(delimiter);
         
         for (int k = 1; k<headers.length; k++) {
-            smallmap.put(headers[k], data[k]);
+            innerMap.put(headers[k], data[k]);
         }
-        dataMap.put(data[0], smallmap);
+        dataMap.put(data[0], innerMap);
     }
     
     public Map getMap() {
