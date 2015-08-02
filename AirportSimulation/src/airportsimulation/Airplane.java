@@ -11,13 +11,19 @@ package airportsimulation;
  */
 public class Airplane {
 
+    private final String id;
     private final Double fuelTankCapacity;
     private Double actFuelLevel;
     private final Double consumption = 10.0;
 
-    public Airplane(Double fuelTankCapacity) {
+    public Airplane(String id, Double fuelTankCapacity) {
+        this.id = id;
         this.fuelTankCapacity = fuelTankCapacity;
         this.actFuelLevel = fuelTankCapacity;
+    }
+    
+    public String getId() {
+        return id;
     }
 
     public void move(Double distance) {
@@ -27,5 +33,6 @@ public class Airplane {
     public Double getActFuelLevel() {
         return actFuelLevel;
     }
+    
 
 }

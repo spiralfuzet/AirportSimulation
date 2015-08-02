@@ -17,7 +17,7 @@ public class AirplaneTest {
 
     @Test
     public void shouldCreateAirplane() {
-        Airplane airplane = new Airplane(100.0);
+        Airplane airplane = new Airplane("airplane1", 100.0);
         airplane.move(4.0);
 
         assertThat(airplane.getActFuelLevel(), is(60.0));
