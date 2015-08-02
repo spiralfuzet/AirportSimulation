@@ -1,13 +1,3 @@
-/*
- * Copyright (c) 2015 home01.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *    home01 - initial API and implementation and/or initial documentation
- */
 package airportsimulation;
 
 import java.io.BufferedReader;
@@ -27,7 +17,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author home01
+ * @author dobos
  */
 public class CsvAirplaneBuilderTest {
     
@@ -35,7 +25,7 @@ public class CsvAirplaneBuilderTest {
     }
 
     @Test
-    public void shouldBuildExpressionFromCsvMap() {
+    public void shouldBuildAirplaneFromCsvMap() {
         
         AirplaneBuilder builder = 
                 new CsvAirplaneBuilder(createAirplaneMap());
@@ -61,7 +51,7 @@ public class CsvAirplaneBuilderTest {
     }
     
     @Test
-    public void shouldBuildExpressionFromCsvList() {
+    public void shouldBuildAirplaneFromCsvList() {
         
         AirplaneBuilder builder = 
                 new CsvAirplaneBuilder(createAirplaneList());
