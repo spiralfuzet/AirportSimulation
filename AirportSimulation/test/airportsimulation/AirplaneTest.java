@@ -7,6 +7,7 @@ package airportsimulation;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -14,13 +15,27 @@ import org.junit.Test;
  * @author tothm
  */
 public class AirplaneTest {
+    Airplane airplane;
 
-    @Test
+    @Before
     public void shouldCreateAirplane() {
-        Airplane airplane = new Airplane(100.0);
+       airplane = new Airplane();
+       airplane.setActFuelLevel(100.0);
+        
+    }
+    
+    @Test
+    public void shouldMoveAirplane()
+    {
         airplane.move(4.0);
 
         assertThat(airplane.getActFuelLevel(), is(60.0));
+        
+        airplane.move(25.0);
+        assertThat(airplane.getActFuelLevel(), is(0.0));
+        
+        airplane.move(500.0);
+        assertThat(airplane.getActFuelLevel(), is(0.0));
     }
 
 }
