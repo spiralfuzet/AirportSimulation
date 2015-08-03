@@ -11,6 +11,7 @@
 package airportsimulation;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author home01
+ * @author dobos
  */
 public class CSVParserTest {
     
@@ -29,7 +30,7 @@ public class CSVParserTest {
     }
 
     @Test(expected = java.io.FileNotFoundException.class)
-    public void shouldThrowFileNotFoundException() {
+    public void shouldThrowFileNotFoundException() throws FileNotFoundException {
         String wrongFilename = "test_file_not_available.csv";
         boolean hasHeader = true;
         CSVParser parser = new CSVParser(wrongFilename, hasHeader, ";");        

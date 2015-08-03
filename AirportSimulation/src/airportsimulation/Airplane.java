@@ -13,7 +13,6 @@ import java.io.Serializable;
  */
 public class Airplane implements Serializable{
 
-    
     private String id;
     private String aliasName;
     private String aircraftType;
@@ -33,9 +32,15 @@ public class Airplane implements Serializable{
     
     private final Double consumption = 10.0D;
 
-    public Airplane( ) {
+    public Airplane() {
     }
     
+    public Airplane(String id, Double fuelTankCapacity) {
+        this.id = id;
+        this.fuelTankCapacity = fuelTankCapacity;
+        this.actFuelLevel = fuelTankCapacity;
+    }
+
     //todo
     public void move(Double distance)
     {
@@ -75,7 +80,7 @@ public class Airplane implements Serializable{
     public Double getFuelTankCapacity() {
         return fuelTankCapacity;
     }
-
+    
     public void setFuelTankCapacity(Double fuelTankCapacity) {
         this.fuelTankCapacity = fuelTankCapacity;
     }
@@ -83,6 +88,7 @@ public class Airplane implements Serializable{
     public Double getActFuelLevel() {
         return actFuelLevel;
     }
+    
 
     public void setActFuelLevel(Double actFuelLevel) {
         this.actFuelLevel = actFuelLevel;

@@ -19,9 +19,10 @@ public class JsonAirplaneBuilder implements AirplaneBuilder {
         airplanes = new LinkedList<>();
         
         for (JsonObject airplaneData : airplanesData) {
+            String id = airplaneData.getJsonObject("Airplane").getString("id");
             String sActFuelCap = airplaneData.getJsonObject("Airplane").getString("actFuelLevel");
             Double fuelLevel = Double.parseDouble(sActFuelCap);
-            airplanes.add(new Airplane(fuelLevel));
+            airplanes.add(new Airplane(id, fuelLevel));
         }
         
         if (!airplanes.isEmpty()) {

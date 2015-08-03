@@ -4,6 +4,7 @@
 		{
 			"Airplane" :
 			{
+				"id" : "W62339",
 				"aliasName" : "Wizz Air 62339",
 				"aircraftType" : "Airbus A320-232",
 				"fuelTankCapacity" : "1000.0",
@@ -23,6 +24,7 @@
 		{
 			"Airplane" :
 			{
+				"id" : "AT702",
 				"aliasName" : "Air Transar 702",
 				"aircraftType" : "Airbus A330-243",
 				"fuelTankCapacity" : "2500.0",

@@ -13,13 +13,16 @@ public class CsvAirplaneBuilder implements AirplaneBuilder{
     private boolean hasNext;
     private List<Airplane> airplanes = new ArrayList<>();
     private int airplaneCountAct = -1;
-    private final int IDFuelTankCapacity = 3;
+    
+    private final int idxID = 3;
+    private final int idxFuelTankCapacity = 3;
             
     public CsvAirplaneBuilder(Map<String, Map> airplanesData)  {
         airplanes = new ArrayList<>();
         
         for (String airplane : airplanesData.keySet()) {
-            airplanes.add(new Airplane(Double.parseDouble(airplanesData.get(airplane).get("fuelTankCapacity").toString())));
+            double fuelTankCapacity = Double.parseDouble(airplanesData.get(airplane).get("fuelTankCapacity").toString());
+            airplanes.add(new Airplane(airplane, fuelTankCapacity));
             airplaneCountAct += 1;
         }
         if (airplaneCountAct != -1) {
@@ -29,10 +32,11 @@ public class CsvAirplaneBuilder implements AirplaneBuilder{
     
     public CsvAirplaneBuilder(List<String[]> airplanesData)  {
         airplanes = new ArrayList<>();
-        
-        
+
         for (String[] airplane : airplanesData) {
-            airplanes.add(new Airplane(Double.parseDouble(airplane[IDFuelTankCapacity])));
+            String id = airplane[idxID];
+            double fuelTankCapacity = Double.parseDouble(airplane[idxFuelTankCapacity]);
+            airplanes.add(new Airplane(id, fuelTankCapacity));
             airplaneCountAct += 1;
         }
         if (airplaneCountAct != -1) {

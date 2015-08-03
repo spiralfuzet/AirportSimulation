@@ -19,14 +19,14 @@ public class AirplaneTest {
 
     @Before
     public void shouldCreateAirplane() {
-       airplane = new Airplane();
+       airplane = new Airplane("airplane1", 250.0);
        airplane.setActFuelLevel(100.0);
-        
     }
     
     @Test
     public void shouldMoveAirplane()
     {
+        Airplane airplane = new Airplane("airplane1", 100.0);
         airplane.move(4.0);
 
         assertThat(airplane.getActFuelLevel(), is(60.0));

@@ -33,12 +33,12 @@ public class JsonAirplaneBuilderTest {
     
     
     
-    private JsonObject createAirplaneObject(Double fuelCapacity) {
+    private JsonObject createAirplaneObject(String id, Double fuelCapacity) {
         
         JsonObjectBuilder airplaneBuilder = Json.createObjectBuilder();
         JsonObjectBuilder airplaneObjectBuilder = Json.createObjectBuilder();
         
-        
+        airplaneObjectBuilder.add("id", id);
         airplaneObjectBuilder.add("actFuelLevel", fuelCapacity.toString());
         
         airplaneBuilder.add("Airplane", airplaneObjectBuilder);
@@ -52,8 +52,8 @@ public class JsonAirplaneBuilderTest {
         
         List<JsonObject> objectList = new ArrayList<>();
         
-        objectList.add(createAirplaneObject(1000.0));
-        objectList.add(createAirplaneObject(1500.0));
+        objectList.add(createAirplaneObject("airplane1", 1000.0));
+        objectList.add(createAirplaneObject("airplane2", 1500.0));
         
         return objectList;
     }

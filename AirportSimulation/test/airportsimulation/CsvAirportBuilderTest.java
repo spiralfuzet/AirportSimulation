@@ -65,9 +65,7 @@ public class CsvAirportBuilderTest {
         assertThat(builder.getNext(), is(not(nullValue())));
         
         assertThat(builder.hasNext(), is(true));
-        Airport airport = builder.getNext();
-        assertThat(airport, is(not(nullValue())));
-        assertThat(airport.getActFuelLevel(), is(1000.0));
+        assertThat(builder.getNext(), is(not(nullValue())));
         
         assertThat(builder.hasNext(), is(false));
         assertThat(builder.getNext(), is(nullValue()));
