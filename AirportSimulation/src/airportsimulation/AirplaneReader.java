@@ -2,7 +2,7 @@
 package airportsimulation;
 
 import java.util.List;
-import javax.json.JsonObject;
+import java.util.Map;
 
 /**
  *
@@ -10,6 +10,6 @@ import javax.json.JsonObject;
  */
 public interface AirplaneReader {
     
-    public List<JsonObject> getAllAirplanes();
+    public List<Map<String,String>> getAllAirplanes();
     
 }

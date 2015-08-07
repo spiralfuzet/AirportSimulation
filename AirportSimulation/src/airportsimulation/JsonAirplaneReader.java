@@ -31,7 +31,7 @@ public class JsonAirplaneReader implements AirplaneReader {
     }
 
     @Override
-    public List<JsonObject> getAllAirplanes(){
+    public List<Airplane> getAllAirplanes(){
 
         List<JsonObject> airplaneList = null;
         
