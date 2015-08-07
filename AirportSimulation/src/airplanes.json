@@ -1,45 +1,39 @@
 ﻿{
     "Airplanes" :
-    [
-		{
-			"Airplane" :
-			{
-				"id" : "W62339",
-				"aliasName" : "Wizz Air 62339",
-				"aircraftType" : "Airbus A320-232",
-				"fuelTankCapacity" : "1000.0",
-				"actFuelLevel" : "1000.0",
-				"maxSpeed" : "904.0",
-				"maxRange" : "5700",
-				"State" : "0",
-				"actAltitude" : "0.0",
-				"Maintenance" : "0",
-				"maxPassangers" : "150",
-				"actPassangers" : "0",
-				"Weight" : "37230",
-				"maxTakeoffWeight" : "77000",
-				"maxLandingWeight" : "64500"            
-			}
-		},
-		{
-			"Airplane" :
-			{
-				"id" : "AT702",
-				"aliasName" : "Air Transar 702",
-				"aircraftType" : "Airbus A330-243",
-				"fuelTankCapacity" : "2500.0",
-				"actFuelLevel" : "2500.0",
-				"maxSpeed" : "900.0",
-				"maxRange" : "12499",
-				"State" : "0",
-				"actAltitude" : "0.0",
-				"Maintenance" : "0",
-				"maxPassangers" : "253",
-				"actPassangers" : "0",
-				"Weight" : "168000",
-				"maxTakeoffWeight" : "233000",
-				"maxLandingWeight" : "180000"     
-			}
-		}
-    ]
+    {
+        "W62339" :
+        {
+            "aliasName" : "Wizz Air 62339",
+            "aircraftType" : "Airbus A320-232",
+            "fuelTankCapacity" : "1000.0",
+            "actFuelLevel" : "1000.0",
+            "maxSpeed" : "904.0",
+            "maxRange" : "5700",
+            "State" : "0",
+            "actAltitude" : "0.0",
+            "Maintenance" : "0",
+            "maxPassangers" : "150",
+            "actPassangers" : "0",
+            "Weight" : "37230",
+            "maxTakeoffWeight" : "77000",
+            "maxLandingWeight" : "64500"            
+        },
+        "TS702" :
+        {
+            "aliasName" : "Air Transar 702",
+            "aircraftType" : "Airbus A330-243",
+            "fuelTankCapacity" : "2500.0",
+            "actFuelLevel" : "2500.0",
+            "maxSpeed" : "900.0",
+            "maxRange" : "12499",
+            "State" : "0",
+            "actAltitude" : "0.0",
+            "Maintenance" : "0",
+            "maxPassangers" : "253",
+            "actPassangers" : "0",
+            "Weight" : "168000",
+            "maxTakeoffWeight" : "233000",
+            "maxLandingWeight" : "180000"     
+        }
+    }
 }
