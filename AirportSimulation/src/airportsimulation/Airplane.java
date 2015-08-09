@@ -36,18 +36,6 @@ public class Airplane implements Serializable{
     public Airplane( ) {
     }
     
-    //todo
-    public void move(Double distance)
-    {
-        this.actFuelLevel -= consumption * distance;
-        if( actFuelLevel <= 0 )
-        {
-            actFuelLevel = 0.0D;
-            //throw new NoMoreFuelException();
-            //todo: throw noMoreFuelError
-        }
-    }
-
     public String getId() {
         return id;
     }
