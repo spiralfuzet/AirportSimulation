@@ -33,6 +33,9 @@ public class Airplane implements Serializable{
     private final Double consumption = 10.0D;
 
     public Airplane() {
+        this.id = "";
+        this.fuelTankCapacity = 0.0;
+        this.actFuelLevel = 0.0;
     }
     
     public Airplane(String id, Double fuelTankCapacity) {

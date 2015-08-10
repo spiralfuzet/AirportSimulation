@@ -2,7 +2,6 @@
 package airportsimulation;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -10,6 +9,6 @@ import java.util.Map;
  */
 public interface AirplaneReader {
     
-    public List<Map<String,String>> getAllAirplanes();
+    public List<Airplane> getAllAirplanes();
     
 }

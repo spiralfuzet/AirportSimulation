@@ -31,19 +31,18 @@ public class JsonAirplaneReader implements AirplaneReader {
     }
 
     @Override
-    public List<Airplane> getAllAirplanes(){
+    public List<Airplane> getAllAirplanes() {
 
-        List<JsonObject> airplaneList = null;
+        List<Airplane> airplaneList = new ArrayList<>();
         
         try (JsonReader rdr = Json.createReader(reader)) {
-            
-            airplaneList = new ArrayList<>();
 
             JsonObject obj = rdr.readObject();
             JsonArray results = obj.getJsonArray("Airplanes");
 
             for (JsonObject result : results.getValuesAs(JsonObject.class)) {
-                airplaneList.add(result);
+                Airplane a = new Airplane();
+                airplaneList.add(a);
             }
 
             rdr.close();

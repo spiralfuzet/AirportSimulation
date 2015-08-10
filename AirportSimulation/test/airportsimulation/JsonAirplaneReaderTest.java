@@ -26,10 +26,10 @@ public class JsonAirplaneReaderTest {
                 
         AirplaneReader airplaneReader = new JsonAirplaneReader(reader);
         
-        List<JsonObject> objecList = airplaneReader.getAllAirplanes();
+        List<Airplane> objecList = airplaneReader.getAllAirplanes();
         
         assertThat(objecList.size(), is(2));
-        
+        //assertThat(objecList.get(0).getId(), is("kell-id"));
         
     }
     
