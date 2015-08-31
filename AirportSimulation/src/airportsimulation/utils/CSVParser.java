@@ -19,15 +19,6 @@ import java.util.Queue;
  */
 public class CsvParser {
 
-    public static class CsvParserException extends Exception {
-
-        private static final long serialVersionUID = 2171747087216283469L;
-
-        public CsvParserException(String message) {
-            super(message);
-        }
-    }
-
     private final Queue<String> fields;
     private final Queue<Queue<String>> fieldsByLines;
 

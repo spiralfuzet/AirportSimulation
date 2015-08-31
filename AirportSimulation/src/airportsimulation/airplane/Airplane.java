@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author tothm
  */
 public class Airplane implements Serializable{
-    
+
     private static final long serialVersionUID = -5383070425270085876L;
 
     private String id;
@@ -44,6 +44,28 @@ public class Airplane implements Serializable{
         this.id = id;
         this.fuelTankCapacity = fuelTankCapacity;
         this.actFuelLevel = fuelTankCapacity;
+    }
+
+    public Airplane(String id, String aliasName, String aircraftType, Double fuelTankCapacity,
+            Double actFuelLevel, Double maxSpeed, Double maxRange, int State,
+            Double actAltitude, int Maintenance, int maxPassangers, int actPassangers,
+            int Weight, int maxTakeoffWeight, int maxLandingWeight) {
+        this.id = id;
+        this.aliasName = aliasName;
+        this.aircraftType = aircraftType;
+        this.fuelTankCapacity = fuelTankCapacity;
+        this.actFuelLevel = actFuelLevel;
+        this.maxSpeed = maxSpeed;
+        this.maxRange = maxRange;
+        this.minSpeed = minSpeed;
+        this.State = State;
+        this.actAltitude = actAltitude;
+        this.Maintenance = Maintenance;
+        this.maxPassangers = maxPassangers;
+        this.actPassangers = actPassangers;
+        this.Weight = Weight;
+        this.maxTakeoffWeight = maxTakeoffWeight;
+        this.maxLandingWeight = maxLandingWeight;
     }
 
     //todo

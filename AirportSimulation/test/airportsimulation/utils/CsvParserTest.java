@@ -18,7 +18,7 @@ import org.junit.Test;
 public class CsvParserTest {
 
     @Test
-    public void shouldGetFields() throws IOException, CsvParser.CsvParserException {
+    public void shouldGetFields() throws IOException, CsvParserException {
         String fileContent = ""
                 + "42;3.14;\n"
                 + "lorem;ipsum;";
@@ -41,7 +41,7 @@ public class CsvParserTest {
     }
 
     @Test
-    public void shouldGetFieldsByLines() throws IOException, CsvParser.CsvParserException {
+    public void shouldGetFieldsByLines() throws IOException, CsvParserException {
         String fileContent = ""
                 + "42;3.14;\n"
                 + "lorem;ipsum;";

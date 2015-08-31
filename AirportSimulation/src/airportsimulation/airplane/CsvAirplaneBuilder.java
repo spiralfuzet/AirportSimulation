@@ -1,69 +1,82 @@
+/*
+ * Copyright (c) 2015 tothm.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    tothm - initial API and implementation and/or initial documentation
+ */
 package airportsimulation.airplane;
 
+import airportsimulation.utils.CsvParser;
+import airportsimulation.utils.CsvParserException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
- * @author dobos
+ * @author tothm
  */
-public class CsvAirplaneBuilder implements AirplaneBuilder{
-    private boolean hasNext;
-    private List<Airplane> airplanes = new ArrayList<>();
-    private int airplaneCountAct = -1;
+public class CsvAirplaneBuilder implements AirplaneBuilder {
 
-    private final int idxID = 3;
-    private final int idxFuelTankCapacity = 3;
+    private final List<Airplane> airplanes;
+    private int actualAirplane;
 
-    public CsvAirplaneBuilder(Map<String, Map> airplanesData)  {
-        airplanes = new ArrayList<>();
+    public CsvAirplaneBuilder(InputStream inputStream) throws AirplaneBuilderException {
+        this.airplanes = new ArrayList<>();
+        this.actualAirplane = 0;
 
-        for (String airplane : airplanesData.keySet()) {
-            double fuelTankCapacity = Double.parseDouble(airplanesData.get(airplane).get("fuelTankCapacity").toString());
-            airplanes.add(new Airplane(airplane, fuelTankCapacity));
-            airplaneCountAct += 1;
+        try {
+            fillAirplanes(inputStream);
+        } catch (CsvParserException | NumberFormatException ex) {
+            throw new AirplaneBuilderException("Cannot build airplane due to:\n" + ex);
         }
-        if (airplaneCountAct != -1) {
-            hasNext = true;
+
+    }
+
+    private void fillAirplanes(InputStream inputStream) throws CsvParserException, NumberFormatException {
+        CsvParser csvParser = new CsvParser(inputStream);
+        while (csvParser.hasNextLine()) {
+            processLine(csvParser);
         }
     }
 
-    public CsvAirplaneBuilder(List<String[]> airplanesData)  {
-        airplanes = new ArrayList<>();
+    private void processLine(CsvParser csvParser) throws NumberFormatException {
+        List<String> fields = getFields(csvParser);
+        airplanes.add(createAirplane(fields));
+        csvParser.nextLine();
+    }
 
-        for (String[] airplane : airplanesData) {
-            String id = airplane[idxID];
-            double fuelTankCapacity = Double.parseDouble(airplane[idxFuelTankCapacity]);
-            airplanes.add(new Airplane(id, fuelTankCapacity));
-            airplaneCountAct += 1;
+    private List<String> getFields(CsvParser csvParser) {
+        List<String> fields = new ArrayList<>();
+        while (csvParser.hasFieldInCurrentLine()) {
+            fields.add(csvParser.getFieldFromCurrentLine());
         }
-        if (airplaneCountAct != -1) {
-            hasNext = true;
-        }
+        return fields;
+    }
+
+    private Airplane createAirplane(List<String> fields) throws NumberFormatException {
+        Airplane airplane = new Airplane(fields.get(0), fields.get(1), fields.get(2),
+                Double.parseDouble(fields.get(3)), Double.parseDouble(fields.get(4)),
+                Double.parseDouble(fields.get(5)), Double.parseDouble(fields.get(6)),
+                Integer.parseInt(fields.get(7)), Double.parseDouble(fields.get(8)),
+                Integer.parseInt(fields.get(9)), Integer.parseInt(fields.get(10)),
+                Integer.parseInt(fields.get(11)), Integer.parseInt(fields.get(12)),
+                Integer.parseInt(fields.get(13)), Integer.parseInt(fields.get(14)));
+        return airplane;
     }
 
     @Override
     public boolean hasNext() {
-        return hasNext;
+        return (actualAirplane < airplanes.size());
     }
 
     @Override
     public Airplane getNext() {
-        if (hasNext == false) {
-            return null;
-        } else {
-            if (airplaneCountAct != -1) {
-                Airplane airplaneAct = airplanes.get(airplaneCountAct);
-                airplaneCountAct -= 1;
-
-                if (airplaneCountAct == -1) {
-                    hasNext = false;
-                }
-                return airplaneAct;
-            }
-        }
-        return null;
+        return airplanes.get(actualAirplane++);
     }
 
 }
