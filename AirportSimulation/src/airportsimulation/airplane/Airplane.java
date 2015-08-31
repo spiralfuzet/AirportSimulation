@@ -23,7 +23,7 @@ public class Airplane implements Serializable{
     private Double maxSpeed;
     private Double maxRange;
     private Double minSpeed;
-    private int State;
+    private AirplaneStatusFlag State;
     private Double actAltitude;
     private int Maintenance;
     private int maxPassangers;
@@ -47,7 +47,7 @@ public class Airplane implements Serializable{
     }
 
     public Airplane(String id, String aliasName, String aircraftType, Double fuelTankCapacity,
-            Double actFuelLevel, Double maxSpeed, Double maxRange, int State,
+            Double actFuelLevel, Double maxSpeed, Double maxRange, AirplaneStatusFlag State,
             Double actAltitude, int Maintenance, int maxPassangers, int actPassangers,
             int Weight, int maxTakeoffWeight, int maxLandingWeight) {
         this.id = id;
@@ -57,7 +57,7 @@ public class Airplane implements Serializable{
         this.actFuelLevel = actFuelLevel;
         this.maxSpeed = maxSpeed;
         this.maxRange = maxRange;
-        this.minSpeed = minSpeed;
+        //this.minSpeed = minSpeed;
         this.State = State;
         this.actAltitude = actAltitude;
         this.Maintenance = Maintenance;
@@ -145,11 +145,11 @@ public class Airplane implements Serializable{
         this.minSpeed = minSpeed;
     }
 
-    public int getState() {
+    public AirplaneStatusFlag getState() {
         return State;
     }
 
-    public void setState(int State) {
+    public void setState(AirplaneStatusFlag State) {
         this.State = State;
     }
 
@@ -207,6 +207,11 @@ public class Airplane implements Serializable{
 
     public void setMaxLandingWeight(int maxLandingWeight) {
         this.maxLandingWeight = maxLandingWeight;
+    }
+
+    @Override
+    public String toString() {
+        return id + " in: " + State.toString();
     }
 
 }

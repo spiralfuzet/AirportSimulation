@@ -26,8 +26,8 @@ public class CsvAirplaneBuilderTest {
     public void shouldCreateAirplaneFromCsvFile() throws AirplaneBuilderException {
         String content = ""
                 + "#id;aliasName;aircraftType;fuelTankCapacity;actFuelLevel;maxSpeed;maxRange;State;actAltitude;Maintenance;maxPassangers;actPassangers;Weight;maxTakeoffWeight;maxLandingWeight\n"
-                + "W62339;Wizz Air 62339;Airbus A320-232;1000;1000;904;5700;0;0;0;150;0;37230;77000;64500\n"
-                + "AT702;Air Transar 702;Airbus A330-243;2500;2500;900;12499;0;0;0;253;0;168000;233000;180000";
+                + "W62339;Wizz Air 62339;Airbus A320-232;1000;1000;904;5700;SERVICE;0;0;150;0;37230;77000;64500\n"
+                + "AT702;Air Transar 702;Airbus A330-243;2500;2500;900;12499;SERVICE;0;0;253;0;168000;233000;180000";
         InputStream inputStream = new ByteArrayInputStream(content.getBytes());
 
         CsvAirplaneBuilder airplaneBuilder = new CsvAirplaneBuilder(inputStream);

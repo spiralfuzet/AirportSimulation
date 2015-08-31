@@ -24,10 +24,6 @@ import org.json.simple.parser.ParseException;
  */
 public class JsonParser {
 
-    JsonParser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public static class JsonParserException extends Exception {
 
         private static final long serialVersionUID = 2170714236026447079L;

@@ -62,7 +62,7 @@ public class CsvAirplaneBuilder implements AirplaneBuilder {
         Airplane airplane = new Airplane(fields.get(0), fields.get(1), fields.get(2),
                 Double.parseDouble(fields.get(3)), Double.parseDouble(fields.get(4)),
                 Double.parseDouble(fields.get(5)), Double.parseDouble(fields.get(6)),
-                Integer.parseInt(fields.get(7)), Double.parseDouble(fields.get(8)),
+                AirplaneStatusFlag.valueOf(fields.get(7)), Double.parseDouble(fields.get(8)),
                 Integer.parseInt(fields.get(9)), Integer.parseInt(fields.get(10)),
                 Integer.parseInt(fields.get(11)), Integer.parseInt(fields.get(12)),
                 Integer.parseInt(fields.get(13)), Integer.parseInt(fields.get(14)));
