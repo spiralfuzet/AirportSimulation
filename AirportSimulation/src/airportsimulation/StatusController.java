@@ -8,6 +8,7 @@
  */
 package airportsimulation;
 
+import airportsimulation.airplane.AirplaneStatusFlag;
 import airportsimulation.utils.Observer;
 
 /**
@@ -19,5 +20,5 @@ public class StatusController extends Observer {
     void setState(AirplaneStatusFlag airplaneStatusFlag) {
         notify_all();
     }
-    
+
 }

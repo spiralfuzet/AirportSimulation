@@ -15,5 +15,21 @@ package airportsimulation.airplane;
  * @author tothm
  */
 public enum AirplaneStatusFlag {
-    IN_FLIGHT, LANDING, TAKE_OFF, SERVICE, LOAD_OFF, LOAD_IN, TAXI
-}
+    IN_FLIGHT(1),
+    LANDING(1<<1),
+    TAKE_OFF(1<<2),
+    MAINTENANCE(1<<3),
+    LOAD(1<<4),
+    UNLOAD(1<<5),
+    TAXI(1<<6);
+
+    public final int flagValue;
+
+    private AirplaneStatusFlag(final int flagValue) {
+        this.flagValue = flagValue;
+    }
+
+    public int getFlagValue() {
+        return flagValue;
+    }
+};

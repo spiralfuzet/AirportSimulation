@@ -10,40 +10,39 @@
  */
 package airportsimulation;
 
+import airportsimulation.airplane.AirplaneStatusFlag;
 import airportsimulation.utils.Observable;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 /**
  *
  * @author Rendszergazda
  */
 public class StatusControllerTest {
-    
+
     private static class MockObservable implements Observable {
 
         boolean called = false;
-        
+
         @Override
         public void update() {
             called = true;
         }
-        
+
     }
 
     @Test
-    public void shouldControllPlanes() {        
+    public void shouldControllPlanes() {
         StatusController controller = new StatusController();
         MockObservable mockObservable = new MockObservable();
         controller.attach(mockObservable);
-        
+
         controller.setState(AirplaneStatusFlag.TAXI);
-        
+
         assertThat(mockObservable.called, is(true));
-        
+
     }
-    
+
 }
