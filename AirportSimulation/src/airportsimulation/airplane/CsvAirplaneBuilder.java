@@ -1,4 +1,4 @@
-package airportsimulation;
+package airportsimulation.airplane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +12,13 @@ public class CsvAirplaneBuilder implements AirplaneBuilder{
     private boolean hasNext;
     private List<Airplane> airplanes = new ArrayList<>();
     private int airplaneCountAct = -1;
-    
+
     private final int idxID = 3;
     private final int idxFuelTankCapacity = 3;
-            
+
     public CsvAirplaneBuilder(Map<String, Map> airplanesData)  {
         airplanes = new ArrayList<>();
-        
+
         for (String airplane : airplanesData.keySet()) {
             double fuelTankCapacity = Double.parseDouble(airplanesData.get(airplane).get("fuelTankCapacity").toString());
             airplanes.add(new Airplane(airplane, fuelTankCapacity));
@@ -28,7 +28,7 @@ public class CsvAirplaneBuilder implements AirplaneBuilder{
             hasNext = true;
         }
     }
-    
+
     public CsvAirplaneBuilder(List<String[]> airplanesData)  {
         airplanes = new ArrayList<>();
 
@@ -42,7 +42,7 @@ public class CsvAirplaneBuilder implements AirplaneBuilder{
             hasNext = true;
         }
     }
-    
+
     @Override
     public boolean hasNext() {
         return hasNext;
@@ -56,7 +56,7 @@ public class CsvAirplaneBuilder implements AirplaneBuilder{
             if (airplaneCountAct != -1) {
                 Airplane airplaneAct = airplanes.get(airplaneCountAct);
                 airplaneCountAct -= 1;
-                
+
                 if (airplaneCountAct == -1) {
                     hasNext = false;
                 }
@@ -65,5 +65,5 @@ public class CsvAirplaneBuilder implements AirplaneBuilder{
         }
         return null;
     }
-    
+
 }

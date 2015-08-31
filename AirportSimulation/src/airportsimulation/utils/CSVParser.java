@@ -1,104 +1,81 @@
-package airportsimulation;
+/*
+ * Copyright (c) 2015 Astron Informatikai Kft.
+ *
+ */
+package airportsimulation.utils;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.Queue;
 
 /**
  *
- * @author dobos
+ * @author tothm
  */
-public final class CSVParser {
-    private String fileName = "";
-    private BufferedReader fileReader = null;
-    private String delimiter;
-    private final boolean hasHeader;
-    private Map<String, Map> dataMap = new HashMap<>();
-    private List<String[]> dataList = new ArrayList<>();
-    
-    public CSVParser(String _fileName, boolean _hasHeader, String _delimiter) throws FileNotFoundException {
-        fileName = _fileName;
-        hasHeader = _hasHeader;
-        delimiter = _delimiter;
-        try
-        {   
-            fileReader = new BufferedReader(new FileReader(fileName));
-            this.readFile();
-        } catch (FileNotFoundException e) {
-            System.out.println("ERROR CSV file not found: " + fileName);
-            throw e;
-        }
-    }
-    
-    public CSVParser(BufferedReader reader, boolean _hasHeader, String _delimiter) {
-        fileReader = reader;
-        hasHeader = _hasHeader;
-        delimiter = _delimiter;
-        this.readFile();
-    }
-    
-    public void readFile() {
+public class CsvParser {
 
-        String line = "";
-        String header = "";
-       
-        try
-        {   
-            if (hasHeader) {
-                header = fileReader.readLine();
-            }
-            
-            while ((line = fileReader.readLine()) != null)
-            {
-                String[] records = line.split(delimiter);
+    public static class CsvParserException extends Exception {
 
-                addToList(records);
-                if (hasHeader) {
-                    addToMap(header, records);
+        private static final long serialVersionUID = 2171747087216283469L;
+
+        public CsvParserException(String message) {
+            super(message);
+        }
+    }
+
+    private final Queue<String> fields;
+    private final Queue<Queue<String>> fieldsByLines;
+
+    public CsvParser(InputStream inputStream) throws CsvParserException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-2"))) {
+            fields = new LinkedList<>();
+            fieldsByLines = new LinkedList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("#") || line.isEmpty()) {
+                    continue;
                 }
+                String[] splittedLine = line.split(";");
+                final List<String> splittedList = Arrays.asList(splittedLine);
+
+                fields.addAll(splittedList);
+
+                Queue<String> fieldsOfLine = new LinkedList<>();
+                fieldsOfLine.addAll(splittedList);
+                fieldsByLines.add(fieldsOfLine);
             }
-        }
-        catch (Exception e) {
-            System.out.println("ERROR while reading CSV File: " + fileName);
-        }
-        finally
-        {
-            if (fileReader != null) {
-                try {
-                    fileReader.close();
-                } catch (IOException e) {
-                    System.out.println("ERROR while closing CSVParser");
-                }
-            }
+        } catch (IOException ex) {
+            throw new CsvParserException("Cannot parse csv due to:\n" + ex);
         }
     }
-    
-    private void addToList(String[] data) {
-        dataList.add(data);
+
+    public boolean hasNextField() {
+        return !fields.isEmpty();
     }
-    
-    public List<String[]> getList() {
-        return dataList;        
+
+    public String getNextField() {
+        return fields.poll();
     }
-    
-    private void addToMap(String header, String[] data) {
-        Map<String, String> innerMap = new HashMap<String, String>();
-        String[] headers = header.split(delimiter);
-        
-        for (int k = 1; k<headers.length; k++) {
-            innerMap.put(headers[k], data[k]);
-        }
-        dataMap.put(data[0], innerMap);
+
+    public boolean hasNextLine() {
+        return !fieldsByLines.isEmpty();
     }
-    
-    public Map getMap() {
-        return dataMap;        
+
+    public void nextLine() {
+        fieldsByLines.poll();
     }
-    
+
+    public boolean hasFieldInCurrentLine() {
+        return !fieldsByLines.element().isEmpty();
+    }
+
+    public String getFieldFromCurrentLine() {
+        return fieldsByLines.element().poll();
+    }
 
 }

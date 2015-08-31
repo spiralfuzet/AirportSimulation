@@ -1,5 +1,5 @@
 
-package airportsimulation;
+package airportsimulation.airplane;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,22 +14,22 @@ public class JsonAirplaneBuilder implements AirplaneBuilder {
 
     private final Queue<Airplane> airplanes;
     private boolean hasNext;
-    
+
     public JsonAirplaneBuilder(List<JsonObject> airplanesData) {
         airplanes = new LinkedList<>();
-        
+
         for (JsonObject airplaneData : airplanesData) {
             String id = airplaneData.getJsonObject("Airplane").getString("id");
             String sActFuelCap = airplaneData.getJsonObject("Airplane").getString("actFuelLevel");
             Double fuelLevel = Double.parseDouble(sActFuelCap);
             airplanes.add(new Airplane(id, fuelLevel));
         }
-        
+
         if (!airplanes.isEmpty()) {
             hasNext = true;
         }
     }
-    
+
     @Override
     public boolean hasNext() {
         return hasNext;
@@ -40,7 +40,7 @@ public class JsonAirplaneBuilder implements AirplaneBuilder {
         if (hasNext == false) {
             return null;
         }
-        
+
         hasNext = false;
         return airplanes.remove();
     }

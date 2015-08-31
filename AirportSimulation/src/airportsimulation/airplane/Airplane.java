@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package airportsimulation;
+package airportsimulation.airplane;
 
 import java.io.Serializable;
 
@@ -12,6 +12,8 @@ import java.io.Serializable;
  * @author tothm
  */
 public class Airplane implements Serializable{
+    
+    private static final long serialVersionUID = -5383070425270085876L;
 
     private String id;
     private String aliasName;
@@ -29,7 +31,7 @@ public class Airplane implements Serializable{
     private int Weight;
     private int maxTakeoffWeight;
     private int maxLandingWeight;
-    
+
     private final Double consumption = 10.0D;
 
     public Airplane() {
@@ -37,7 +39,7 @@ public class Airplane implements Serializable{
         this.fuelTankCapacity = 0.0;
         this.actFuelLevel = 0.0;
     }
-    
+
     public Airplane(String id, Double fuelTankCapacity) {
         this.id = id;
         this.fuelTankCapacity = fuelTankCapacity;
@@ -63,11 +65,11 @@ public class Airplane implements Serializable{
     public void setId(String id) {
         this.id = id;
     }
-    
+
     public String getAliasName() {
         return aliasName;
     }
-    
+
     public void setAliasName(String aliasName) {
         this.aliasName = aliasName;
     }
@@ -83,7 +85,7 @@ public class Airplane implements Serializable{
     public Double getFuelTankCapacity() {
         return fuelTankCapacity;
     }
-    
+
     public void setFuelTankCapacity(Double fuelTankCapacity) {
         this.fuelTankCapacity = fuelTankCapacity;
     }
@@ -91,7 +93,7 @@ public class Airplane implements Serializable{
     public Double getActFuelLevel() {
         return actFuelLevel;
     }
-    
+
 
     public void setActFuelLevel(Double actFuelLevel) {
         this.actFuelLevel = actFuelLevel;
