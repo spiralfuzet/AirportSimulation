@@ -8,6 +8,9 @@ package airportsimulation;
 import airportsimulation.airplane.AirplaneBuilder;
 import airportsimulation.airplane.AirplaneBuilderException;
 import airportsimulation.airplane.CsvAirplaneBuilder;
+import airportsimulation.airport.AirportBuilder;
+import airportsimulation.airport.AirportBuilderException;
+import airportsimulation.airport.CsvAirportBuilder;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,6 +34,19 @@ public class AirportSimulation {
             }
 
         } catch (FileNotFoundException | AirplaneBuilderException ex) {
+            System.err.println(ex);
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+
+        try (InputStream airportStream = new FileInputStream("input/airports.csv")) {
+            AirportBuilder airportBuilder = new CsvAirportBuilder(airportStream);
+
+            while (airportBuilder.hasNext()) {
+                System.out.println(airportBuilder.getNext());
+            }
+
+        } catch (FileNotFoundException | AirportBuilderException ex) {
             System.err.println(ex);
         } catch (IOException ex) {
             System.err.println(ex);

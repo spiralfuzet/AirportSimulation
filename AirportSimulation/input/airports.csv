@@ -1,3 +1,3 @@
-id;aliasName;Country;maxCapacityAircrafts;actCapacityAircrafts;maxCapacityPassangers;countRunways
+#id;aliasName;Country;maxCapacityAircrafts;actCapacityAircrafts;maxCapacityPassangers;countRunways
 BUD;BUD/LHBP Budapest Liszt Ferenc International Airport;Hungary;75;0;4000;2
 YUL;YUL/CYUL Montreal Pierre Elliott Trudeau Airport;Canada;50;0;2500;2
