@@ -15,9 +15,7 @@ import airportsimulation.utils.CsvParser;
 import airportsimulation.utils.CsvParserException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -25,11 +23,11 @@ import java.util.Map;
  */
 public class CsvScheduleReader implements ScheduleReader {
 
-    private final Map<String, List<Schedule>> schedules;
+    private final List<Schedule> schedules;
 
     public CsvScheduleReader(InputStream inputStream) throws ScheduleBuilderException {
         try {
-            this.schedules = new HashMap<>();
+            this.schedules = new ArrayList<>();
 
             CsvParser csvParser = new CsvParser(inputStream);
             while (csvParser.hasNextLine()) {
@@ -44,11 +42,7 @@ public class CsvScheduleReader implements ScheduleReader {
 
     private void addToSchedules(List<String> fields) {
         Schedule schedule = createSchedule(fields);
-        final String airplaneId = schedule.getAirplaneId();
-        if (!schedules.containsKey(airplaneId)) {
-            schedules.put(schedule.getAirplaneId(), new ArrayList<Schedule>());
-        }
-        schedules.get(schedule.getAirplaneId()).add(schedule);
+        schedules.add(schedule);
     }
 
     private List<String> getFields(CsvParser csvParser) {
@@ -65,7 +59,7 @@ public class CsvScheduleReader implements ScheduleReader {
     }
 
     @Override
-    public Map<String, List<Schedule>> getSchedules() {
+    public List<Schedule> getSchedules() {
         return schedules;
     }
 

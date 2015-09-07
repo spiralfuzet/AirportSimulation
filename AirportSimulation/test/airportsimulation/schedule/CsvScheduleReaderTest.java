@@ -14,7 +14,6 @@ import airportsimulation.airplane.AirplaneStatusFlag;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
@@ -42,11 +41,10 @@ public class CsvScheduleReaderTest {
         InputStream inputStream = new ByteArrayInputStream(content.getBytes());
 
         ScheduleReader sr = new CsvScheduleReader(inputStream);
-        Map<String, List<Schedule>> schedules = sr.getSchedules();
-        final List<Schedule> schedulesForW62339 = schedules.get("W62339");
+        List<Schedule> schedules = sr.getSchedules();
 
-        assertThat(schedulesForW62339.size(), is(10));
-        assertThat(schedulesForW62339.get(1).getStatusFlag(), is(AirplaneStatusFlag.TAXI));
+        assertThat(schedules.size(), is(10));
+        assertThat(schedules.get(1).getStatusFlag(), is(AirplaneStatusFlag.TAXI));
 
     }
 

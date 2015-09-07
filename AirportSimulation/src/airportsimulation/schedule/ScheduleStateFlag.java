@@ -10,12 +10,10 @@
  */
 package airportsimulation.schedule;
 
-import java.util.List;
-
 /**
  *
  * @author tothm
  */
-public interface ScheduleReader {
-    List<Schedule> getSchedules();
+public enum ScheduleStateFlag {
+    RUNNING, ENDED;
 }
