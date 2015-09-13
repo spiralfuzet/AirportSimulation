@@ -47,7 +47,6 @@ public class Scheduler {
     }
 
     private void queueSchedules(Builder<Schedule> scheduleReader) {
-//        for (Schedule s : scheduleReader.getSchedules()) {
         while (scheduleReader.hasNext()) {
             Schedule s = scheduleReader.getNext();
             final String airplaneId = s.getAirplaneId();

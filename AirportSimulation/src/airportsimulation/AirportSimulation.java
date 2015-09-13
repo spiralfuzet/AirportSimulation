@@ -25,21 +25,7 @@ public class AirportSimulation {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        try (InputStream airplaneStream = new FileInputStream("input/airplanes.csv")) {
-//            AirplaneBuilder airplaneBuilder = new CsvAirplaneBuilder(airplaneStream);
-//
-//            while (airplaneBuilder.hasNext()) {
-//                System.out.println(airplaneBuilder.getNext());
-//            }
-//
-//        } catch (FileNotFoundException | AirplaneBuilderException ex) {
-//            System.err.println(ex);
-//        } catch (IOException ex) {
-//            System.err.println(ex);
-//        }
-
         try (InputStream airportStream = new FileInputStream("input/airports.csv")) {
-//            AirportBuilder airportBuilder = new CsvAirportBuilder(airportStream);
             Builder<Airport> airportBuilder = new CsvBuilder<>(new AirportFactory(),airportStream);
 
             while (airportBuilder.hasNext()) {
@@ -58,8 +44,6 @@ public class AirportSimulation {
 
             Builder<Airplane> airplaneBuilder = new CsvBuilder<>(
                     new AirplaneFactory(), airplaneStream);
-            //AirplaneBuilder airplaneBuilder = new CsvAirplaneBuilder(airplaneStream);
-            //ScheduleReader scheduleReader = new CsvScheduleReader(scheduleStream);
             Builder<Schedule> scheduleBuilder = new CsvBuilder<>(
                     new ScheduleFactory(), scheduleStream);
 
