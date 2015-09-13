@@ -5,16 +5,11 @@
  */
 package airportsimulation;
 
-import airportsimulation.airplane.AirplaneBuilder;
-import airportsimulation.airplane.AirplaneBuilderException;
-import airportsimulation.airplane.CsvAirplaneBuilder;
-import airportsimulation.airport.AirportBuilder;
-import airportsimulation.airport.AirportBuilderException;
-import airportsimulation.airport.CsvAirportBuilder;
-import airportsimulation.schedule.CsvScheduleReader;
-import airportsimulation.schedule.ScheduleBuilderException;
-import airportsimulation.schedule.ScheduleReader;
-import airportsimulation.schedule.Scheduler;
+import airportsimulation.airplane.*;
+import airportsimulation.airport.*;
+import airportsimulation.schedule.*;
+import airportsimulation.utils.*;
+import airportsimulation.utils.CsvBuilderException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,13 +39,14 @@ public class AirportSimulation {
 //        }
 
         try (InputStream airportStream = new FileInputStream("input/airports.csv")) {
-            AirportBuilder airportBuilder = new CsvAirportBuilder(airportStream);
+//            AirportBuilder airportBuilder = new CsvAirportBuilder(airportStream);
+            Builder<Airport> airportBuilder = new CsvBuilder<>(new AirportFactory(),airportStream);
 
             while (airportBuilder.hasNext()) {
                 System.out.println(airportBuilder.getNext());
             }
 
-        } catch (FileNotFoundException | AirportBuilderException ex) {
+        } catch (FileNotFoundException | CsvBuilderException ex) {
             System.err.println(ex);
         } catch (IOException ex) {
             System.err.println(ex);
@@ -60,13 +56,15 @@ public class AirportSimulation {
                 InputStream airplaneStream = new FileInputStream("input/airplanes.csv");
                 InputStream scheduleStream = new FileInputStream("input/schedule.csv")) {
 
-            AirplaneBuilder airplaneBuilder = new CsvAirplaneBuilder(airplaneStream);
+            Builder<Airplane> airplaneBuilder = new CsvBuilder<>(
+                    new AirplaneFactory(), airplaneStream);
+            //AirplaneBuilder airplaneBuilder = new CsvAirplaneBuilder(airplaneStream);
             ScheduleReader scheduleReader = new CsvScheduleReader(scheduleStream);
 
-            Scheduler scheduler = new Scheduler(airplaneBuilder, scheduleReader);
-            scheduler.startSchedules();
+//            Scheduler scheduler = new Scheduler(airplaneBuilder, scheduleReader);
+//            scheduler.startSchedules();
 
-        } catch (FileNotFoundException | AirplaneBuilderException | ScheduleBuilderException ex) {
+        } catch (FileNotFoundException | CsvBuilderException | ScheduleBuilderException ex) {
             System.err.println(ex);
         } catch (IOException ex) {
             System.err.println(ex);
