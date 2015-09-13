@@ -59,12 +59,14 @@ public class AirportSimulation {
             Builder<Airplane> airplaneBuilder = new CsvBuilder<>(
                     new AirplaneFactory(), airplaneStream);
             //AirplaneBuilder airplaneBuilder = new CsvAirplaneBuilder(airplaneStream);
-            ScheduleReader scheduleReader = new CsvScheduleReader(scheduleStream);
+            //ScheduleReader scheduleReader = new CsvScheduleReader(scheduleStream);
+            Builder<Schedule> scheduleBuilder = new CsvBuilder<>(
+                    new ScheduleFactory(), scheduleStream);
 
-//            Scheduler scheduler = new Scheduler(airplaneBuilder, scheduleReader);
-//            scheduler.startSchedules();
+            Scheduler scheduler = new Scheduler(airplaneBuilder, scheduleBuilder);
+            scheduler.startSchedules();
 
-        } catch (FileNotFoundException | CsvBuilderException | ScheduleBuilderException ex) {
+        } catch (FileNotFoundException | CsvBuilderException ex) {
             System.err.println(ex);
         } catch (IOException ex) {
             System.err.println(ex);

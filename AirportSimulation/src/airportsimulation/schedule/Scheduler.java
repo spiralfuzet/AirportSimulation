@@ -11,7 +11,7 @@
 package airportsimulation.schedule;
 
 import airportsimulation.airplane.Airplane;
-import airportsimulation.airplane.AirplaneBuilder;
+import airportsimulation.utils.Builder;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -36,7 +36,7 @@ public class Scheduler {
     private final Map<String, Future> scheduleStateFutures;
     private final ExecutorService executorService;
 
-    public Scheduler(AirplaneBuilder airplaneBuilder, ScheduleReader scheduleReader) {
+    public Scheduler(Builder<Airplane> airplaneBuilder, Builder<Schedule> scheduleReader) {
         schedules = new HashMap<>();
         scheduleControllers = new HashMap<>();
         scheduleStateFutures = new HashMap<>();
@@ -46,8 +46,10 @@ public class Scheduler {
         createControllers(airplaneBuilder);
     }
 
-    private void queueSchedules(ScheduleReader scheduleReader) {
-        for (Schedule s : scheduleReader.getSchedules()) {
+    private void queueSchedules(Builder<Schedule> scheduleReader) {
+//        for (Schedule s : scheduleReader.getSchedules()) {
+        while (scheduleReader.hasNext()) {
+            Schedule s = scheduleReader.getNext();
             final String airplaneId = s.getAirplaneId();
             if (!schedules.containsKey(airplaneId)) {
                 schedules.put(airplaneId, new LinkedList<Schedule>());
@@ -56,7 +58,7 @@ public class Scheduler {
         }
     }
 
-    private void createControllers(AirplaneBuilder airplaneBuilder) {
+    private void createControllers(Builder<Airplane> airplaneBuilder) {
         while (airplaneBuilder.hasNext()) {
             Airplane airplane = airplaneBuilder.getNext();
             StatusController statusController = new StatusController(airplane);
