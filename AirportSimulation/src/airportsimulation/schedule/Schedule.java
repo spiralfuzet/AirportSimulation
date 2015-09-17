@@ -24,9 +24,9 @@ public class Schedule implements Serializable {
     private String airplaneId;
     private AirplaneStatusFlag statusFlag;
     private String airportId;
-    private Integer inStatusSecs;
+    private Double inStatusSecs;
 
-    public Schedule(String airplaneId, AirplaneStatusFlag statusFlag, String airportId, Integer inStatusSecs) {
+    public Schedule(String airplaneId, AirplaneStatusFlag statusFlag, String airportId, Double inStatusSecs) {
         this.airplaneId = airplaneId;
         this.statusFlag = statusFlag;
         this.airportId = airportId;
@@ -45,7 +45,7 @@ public class Schedule implements Serializable {
         return airportId;
     }
 
-    public Integer getInStatusSecs() {
+    public Double getInStatusSecs() {
         return inStatusSecs;
     }
 
@@ -61,7 +61,7 @@ public class Schedule implements Serializable {
         this.airportId = airportId;
     }
 
-    public void setInStatusSecs(Integer inStatusSecs) {
+    public void setInStatusSecs(Double inStatusSecs) {
         this.inStatusSecs = inStatusSecs;
     }
 

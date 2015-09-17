@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author tothm
  */
-public class Airplane implements Serializable{
+public class Airplane implements Serializable {
 
     private static final long serialVersionUID = -5383070425270085876L;
 
@@ -32,7 +32,7 @@ public class Airplane implements Serializable{
     private int maxTakeoffWeight;
     private int maxLandingWeight;
 
-    private final Double consumption = 10.0D;
+    private Double consumption = 10.0d;
 
     public Airplane() {
         this.id = "";
@@ -72,6 +72,10 @@ public class Airplane implements Serializable{
         return consumption;
     }
 
+    public void setConsumption(Double consumption) {
+        this.consumption = consumption;
+    }
+
     public String getId() {
         return id;
     }
@@ -107,7 +111,6 @@ public class Airplane implements Serializable{
     public Double getActFuelLevel() {
         return actFuelLevel;
     }
-
 
     public void setActFuelLevel(Double actFuelLevel) {
         this.actFuelLevel = actFuelLevel;

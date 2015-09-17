@@ -43,18 +43,11 @@ public class StatusControllerSelector extends Observable {
     }
 
     public void setSchedule(final Schedule currentSchedule) throws EventHandlerException {
-//        try {
-            airplane.setState(currentSchedule.getStatusFlag());
-            this.currentSchedule = currentSchedule;
-            notifyObservers();
+        airplane.setState(currentSchedule.getStatusFlag());
+        this.currentSchedule = currentSchedule;
+        notifyObservers();
 
-            EventHandler eventHandler = eventHandlerFactory.create(airplane, currentSchedule);
-            statusController.startEvent(eventHandler);
-
-            //Thread.sleep(currentSchedule.getInStatusSecs() * 1000);
-
-//        } catch (InterruptedException ex) {
-//            System.err.println("Cannot execute schedule for " + airplane + " due to:\n" + ex);
-//        }
+        EventHandler eventHandler = eventHandlerFactory.create(airplane, currentSchedule);
+        statusController.startEvent(eventHandler);
     }
 }

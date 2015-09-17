@@ -22,8 +22,8 @@ public class ScheduleFactory implements Factory<Schedule>{
 
     @Override
     public Schedule create(List<String> fields) {
-    
+
         return new Schedule(fields.get(0), AirplaneStatusFlag.valueOf(fields.get(1)),
-                fields.get(2), Integer.parseInt(fields.get(3)));}
-    
+                fields.get(2), Double.parseDouble(fields.get(3)));}
+
 }

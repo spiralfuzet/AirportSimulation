@@ -10,7 +10,6 @@
  */
 package airportsimulation.schedule;
 
-import airportsimulation.airplane.Airplane;
 import airportsimulation.event.StatusControllerSelector;
 import java.util.Queue;
 import java.util.concurrent.Callable;
@@ -27,10 +26,6 @@ public class ScheduleController implements Callable<StateFlag> {
     public ScheduleController(StatusControllerSelector statusController, Queue<Schedule> schedules) {
         this.statusController = statusController;
         this.schedules = schedules;
-    }
-
-    public Airplane getAirplane() {
-        return statusController.getAirplane();
     }
 
     @Override

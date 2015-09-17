@@ -36,7 +36,7 @@ public class StatusControllerTest {
         a.setState(AirplaneStatusFlag.LOAD);
 
         Future<StateFlag> mockFuture = Mockito.mock(Future.class);
-        Mockito.when(mockFuture.get()).thenReturn(StateFlag.ENDED);
+        Mockito.when(mockFuture.get()).thenReturn(StateFlag.RUNNING).thenReturn(StateFlag.ENDED);
 
         ExecutorService mockExecutorService = Mockito.mock(ExecutorService.class);
         Mockito.when(
@@ -47,7 +47,7 @@ public class StatusControllerTest {
 
         assertThat(a.getState(), is(AirplaneStatusFlag.LOAD));
 
-        sc.setSchedule(new Schedule(null, AirplaneStatusFlag.TAKE_OFF, null, 0));
+        sc.setSchedule(new Schedule(null, AirplaneStatusFlag.TAKE_OFF, null, 0.0d));
 
         assertThat(a.getState(), is(AirplaneStatusFlag.TAKE_OFF));
     }

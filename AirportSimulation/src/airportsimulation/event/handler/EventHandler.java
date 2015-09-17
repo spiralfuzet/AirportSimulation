@@ -26,7 +26,7 @@ public abstract class EventHandler implements Callable<StateFlag> {
     protected final Airplane airplane;
     protected final Schedule schedule;
 
-    private Integer secondsLeftFromEvent;
+    private Double secondsLeftFromEvent;
 
     public EventHandler(final Airplane airplane, final Schedule schedule) {
         this.airplane = airplane;
@@ -38,8 +38,8 @@ public abstract class EventHandler implements Callable<StateFlag> {
     @Override
     public final StateFlag call() throws Exception {
         secondsLeftFromEvent -= EVENT_LOOP_LENGTH_IN_MILISECONDS;
+        handleEvent();
         if (secondsLeftFromEvent > 0) {
-            handleEvent();
             Thread.sleep(EVENT_LOOP_LENGTH_IN_MILISECONDS);
             return StateFlag.RUNNING;
         }
