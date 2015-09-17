@@ -11,6 +11,7 @@
 package airportsimulation.schedule;
 
 import airportsimulation.airplane.Airplane;
+import airportsimulation.gui.CLIViewer;
 import airportsimulation.utils.Builder;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -60,7 +61,11 @@ public class Scheduler {
     private void createControllers(Builder<Airplane> airplaneBuilder) {
         while (airplaneBuilder.hasNext()) {
             Airplane airplane = airplaneBuilder.getNext();
+
             StatusController statusController = new StatusController(airplane);
+            statusController.attach(new CLIViewer());
+
+
             final String airplaneId = airplane.getId();
             if (!schedules.containsKey(airplaneId)) {
                 continue;

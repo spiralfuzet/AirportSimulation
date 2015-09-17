@@ -11,31 +11,35 @@
 package airportsimulation.schedule;
 
 import airportsimulation.airplane.Airplane;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import airportsimulation.utils.Observable;
 
 /**
  *
  * @author tothm
  */
-public class StatusController {
+public class StatusController extends Observable {
 
     private final Airplane airplane;
+    private Schedule currentSchedule;
 
     public StatusController(Airplane airplane) {
         this.airplane = airplane;
+        this.currentSchedule = null;
     }
 
     public Airplane getAirplane() {
         return airplane;
     }
 
+    public Schedule getCurrentSchedule() {
+        return currentSchedule;
+    }
+
     public void setSchedule(final Schedule currentSchedule) {
         try {
             airplane.setState(currentSchedule.getStatusFlag());
-
-            String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-            System.out.println(timeStamp + " " + airplane + " " + currentSchedule.getAirportId());
+            this.currentSchedule = currentSchedule;
+            notifyObservers();
 
             Thread.sleep(currentSchedule.getInStatusSecs() * 1000);
         } catch (InterruptedException ex) {

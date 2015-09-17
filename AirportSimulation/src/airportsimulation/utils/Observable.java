@@ -8,10 +8,28 @@
  */
 package airportsimulation.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author tothm
  */
-public interface Observable {
-    public void update();
+public class Observable {
+
+    List<Observer> observers;
+
+    public Observable() {
+        observers = new ArrayList<>();
+    }
+
+    public void attach(Observer observer) {
+        observers.add(observer);
+    }
+
+    public void notifyObservers() {
+        for (Observer o : observers) {
+            o.update(this);
+        }
+    }
 }
