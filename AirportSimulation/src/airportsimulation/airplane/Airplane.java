@@ -68,16 +68,8 @@ public class Airplane implements Serializable{
         this.maxLandingWeight = maxLandingWeight;
     }
 
-    //todo
-    public void move(Double distance)
-    {
-        this.actFuelLevel -= consumption * distance;
-        if( actFuelLevel <= 0 )
-        {
-            actFuelLevel = 0.0D;
-            //throw new NoMoreFuelException();
-            //todo: throw noMoreFuelError
-        }
+    public Double getConsumption() {
+        return consumption;
     }
 
     public String getId() {
@@ -211,7 +203,7 @@ public class Airplane implements Serializable{
 
     @Override
     public String toString() {
-        return id + " in: " + State.toString();
+        return id + " in: " + State.toString() + " (fuel: " + actFuelLevel + ")";
     }
 
 }

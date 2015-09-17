@@ -14,6 +14,6 @@ package airportsimulation.schedule;
  *
  * @author tothm
  */
-public enum ScheduleStateFlag {
+public enum StateFlag {
     RUNNING, ENDED;
 }

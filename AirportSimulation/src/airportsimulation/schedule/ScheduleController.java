@@ -11,6 +11,7 @@
 package airportsimulation.schedule;
 
 import airportsimulation.airplane.Airplane;
+import airportsimulation.event.StatusControllerSelector;
 import java.util.Queue;
 import java.util.concurrent.Callable;
 
@@ -18,12 +19,12 @@ import java.util.concurrent.Callable;
  *
  * @author tothm
  */
-public class ScheduleController implements Callable<ScheduleStateFlag> {
+public class ScheduleController implements Callable<StateFlag> {
 
-    private final StatusController statusController;
+    private final StatusControllerSelector statusController;
     private final Queue<Schedule> schedules;
 
-    public ScheduleController(StatusController statusController, Queue<Schedule> schedules) {
+    public ScheduleController(StatusControllerSelector statusController, Queue<Schedule> schedules) {
         this.statusController = statusController;
         this.schedules = schedules;
     }
@@ -33,13 +34,13 @@ public class ScheduleController implements Callable<ScheduleStateFlag> {
     }
 
     @Override
-    public ScheduleStateFlag call() throws Exception {
+    public StateFlag call() throws Exception {
         if (schedules.isEmpty()) {
-            return ScheduleStateFlag.ENDED;
+            return StateFlag.ENDED;
         }
         statusController.setSchedule(schedules.element());
         schedules.remove();
-        return ScheduleStateFlag.RUNNING;
+        return StateFlag.RUNNING;
     }
 
 }

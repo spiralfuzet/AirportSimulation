@@ -10,7 +10,7 @@
  */
 package airportsimulation.gui;
 
-import airportsimulation.schedule.StatusController;
+import airportsimulation.event.StatusControllerSelector;
 import airportsimulation.utils.Observable;
 import airportsimulation.utils.Observer;
 import java.text.SimpleDateFormat;
@@ -24,10 +24,10 @@ public class CLIViewer implements Observer {
 
     @Override
     public void update(Observable observable) {
-        if (!(observable instanceof StatusController)) {
+        if (!(observable instanceof StatusControllerSelector)) {
             return;
         }
-        StatusController sc = (StatusController) observable;
+        StatusControllerSelector sc = (StatusControllerSelector) observable;
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         System.out.println(timeStamp + " " + sc.getAirplane() + " " + sc.getCurrentSchedule().getAirportId());
     }

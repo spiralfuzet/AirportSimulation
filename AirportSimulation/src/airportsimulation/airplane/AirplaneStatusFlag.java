@@ -15,21 +15,21 @@ package airportsimulation.airplane;
  * @author tothm
  */
 public enum AirplaneStatusFlag {
-    IN_FLIGHT(1),
-    LANDING(1<<1),
-    TAKE_OFF(1<<2),
-    MAINTENANCE(1<<3),
-    LOAD(1<<4),
-    UNLOAD(1<<5),
-    TAXI(1<<6);
+    IN_FLIGHT("handler.InFlightEventHandler"),
+    LANDING("handler.LandingEventHandler"),
+    TAKE_OFF("handler.TakeOffEventHandler"),
+    MAINTENANCE("handler.MaintenanceEventHandler"),
+    LOAD("handler.LoadEventHandler"),
+    UNLOAD("handler.UnloadEventHandler"),
+    TAXI("handler.TaxiEventHandler");
 
-    public final int flagValue;
+    private final String eventHandlerName;
 
-    private AirplaneStatusFlag(final int flagValue) {
-        this.flagValue = flagValue;
+    private AirplaneStatusFlag(final String eventHandlerName) {
+        this.eventHandlerName = eventHandlerName;
     }
 
-    public int getFlagValue() {
-        return flagValue;
+    public String getEventHandlerName() {
+        return eventHandlerName;
     }
 };

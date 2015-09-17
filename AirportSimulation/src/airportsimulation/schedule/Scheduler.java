@@ -11,6 +11,8 @@
 package airportsimulation.schedule;
 
 import airportsimulation.airplane.Airplane;
+import airportsimulation.event.StatusControllerSelector;
+import airportsimulation.event.handler.EventHandler;
 import airportsimulation.gui.CLIViewer;
 import airportsimulation.utils.Builder;
 import java.util.HashMap;
@@ -62,9 +64,8 @@ public class Scheduler {
         while (airplaneBuilder.hasNext()) {
             Airplane airplane = airplaneBuilder.getNext();
 
-            StatusController statusController = new StatusController(airplane);
+            StatusControllerSelector statusController = new StatusControllerSelector(airplane, executorService);
             statusController.attach(new CLIViewer());
-
 
             final String airplaneId = airplane.getId();
             if (!schedules.containsKey(airplaneId)) {
@@ -92,15 +93,16 @@ public class Scheduler {
     private int checkTaskFinished(Set<String> scheduleInProgressIdSet) {
         int endedScheduleCnt = 0;
         for (String airplaneId : scheduleStateFutures.keySet()) {
-            Future<ScheduleStateFlag> scheduleStateFuture = scheduleStateFutures.get(airplaneId);
+            Future<StateFlag> scheduleStateFuture = scheduleStateFutures.get(airplaneId);
             if (scheduleStateFuture == null) {
                 scheduleInProgressIdSet.remove(airplaneId);
                 ++endedScheduleCnt;
                 continue;
             }
             try {
-                ScheduleStateFlag stateFlag = scheduleStateFuture.get(100, TimeUnit.MILLISECONDS);
-                if (stateFlag.equals(ScheduleStateFlag.ENDED)) {
+                StateFlag stateFlag = scheduleStateFuture.get(
+                        EventHandler.EVENT_LOOP_LENGTH_IN_MILISECONDS, TimeUnit.MILLISECONDS);
+                if (stateFlag.equals(StateFlag.ENDED)) {
                     ++endedScheduleCnt;
                 } else {
                     scheduleInProgressIdSet.remove(airplaneId);
