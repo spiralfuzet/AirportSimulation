@@ -10,20 +10,20 @@
  */
 package airportsimulation.airport;
 
-import airportsimulation.utils.Factory;
+import airportsimulation.utils.HibernatePersistFactory;
 import java.util.List;
 
 /**
  *
  * @author mdhtr
  */
-public class AirportFactory implements Factory<Airport>{
+public class AirportFactory extends HibernatePersistFactory<Airport>{
 
     @Override
-    public Airport create(List<String> fields) throws NumberFormatException {
+    public Airport doCreate(List<String> fields) throws NumberFormatException {
         Airport airport = new Airport(fields.get(0), fields.get(1), fields.get(2),
-                Integer.parseInt(fields.get(3)), Integer.parseInt(fields.get(4)),
-                Integer.parseInt(fields.get(5)));
+                Integer.parseInt(fields.get(3)), Integer.parseInt(fields.get(5)),
+                Integer.parseInt(fields.get(6)));
 
         return airport;
     }

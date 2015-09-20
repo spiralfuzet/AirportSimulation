@@ -10,17 +10,17 @@
  */
 package airportsimulation.airplane;
 
-import airportsimulation.utils.Factory;
+import airportsimulation.utils.HibernatePersistFactory;
 import java.util.List;
 
 /**
  *
  * @author mdhtr
  */
-public class AirplaneFactory implements Factory<Airplane> {
+public class AirplaneFactory extends HibernatePersistFactory<Airplane> {
 
     @Override
-    public Airplane create(List<String> fields) throws NumberFormatException {
+    public Airplane doCreate(List<String> fields) throws NumberFormatException {
         Airplane airplane = new Airplane(fields.get(0), fields.get(1), fields.get(2),
                 Double.parseDouble(fields.get(3)), Double.parseDouble(fields.get(4)),
                 Double.parseDouble(fields.get(5)), Double.parseDouble(fields.get(6)),

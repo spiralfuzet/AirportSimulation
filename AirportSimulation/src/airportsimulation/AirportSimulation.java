@@ -7,6 +7,7 @@ package airportsimulation;
 
 import airportsimulation.airplane.*;
 import airportsimulation.airport.*;
+import airportsimulation.hibernate.HibernateUtil;
 import airportsimulation.schedule.*;
 import airportsimulation.utils.*;
 import airportsimulation.utils.CsvBuilderException;
@@ -14,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 /**
  *
@@ -26,12 +29,12 @@ public class AirportSimulation {
      */
     public static void main(String[] args) {
         try (InputStream airportStream = new FileInputStream("input/airports.csv")) {
-            Builder<Airport> airportBuilder = new CsvBuilder<>(new AirportFactory(),airportStream);
+            Builder<Airport> airportBuilder = new CsvBuilder<>(new AirportFactory(), airportStream);
 
             while (airportBuilder.hasNext()) {
-                System.out.println(airportBuilder.getNext());
+                Airport airport = airportBuilder.getNext();
             }
-
+            
         } catch (FileNotFoundException | CsvBuilderException ex) {
             System.err.println(ex);
         } catch (IOException ex) {
@@ -42,8 +45,9 @@ public class AirportSimulation {
                 InputStream airplaneStream = new FileInputStream("input/airplanes.csv");
                 InputStream scheduleStream = new FileInputStream("input/schedule.csv")) {
 
+            Factory<Airplane> airplaneFactory = new AirplaneFactory();
             Builder<Airplane> airplaneBuilder = new CsvBuilder<>(
-                    new AirplaneFactory(), airplaneStream);
+                    airplaneFactory, airplaneStream);
             Builder<Schedule> scheduleBuilder = new CsvBuilder<>(
                     new ScheduleFactory(), scheduleStream);
 
@@ -55,5 +59,7 @@ public class AirportSimulation {
         } catch (IOException ex) {
             System.err.println(ex);
         }
+        
+        HibernateUtil.shutdown();
     }
 }

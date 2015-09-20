@@ -12,19 +12,38 @@ package airportsimulation.schedule;
 
 import airportsimulation.airplane.AirplaneStatusFlag;
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author tothm
  */
+@Entity
+@Table(name = "schedule")
 public class Schedule implements Serializable {
 
     private static final long serialVersionUID = 2850097011193452810L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "schedule_id")
+    private Long scheduleId;
+    @Column(name = "airplane_id")
     private String airplaneId;
+    @Column(name = "status_flag")
     private AirplaneStatusFlag statusFlag;
+    @Column(name = "airport_id")
     private String airportId;
+    @Column(name = "seconds_spend_in_state")
     private Double inStatusSecs;
+
+    public Schedule() {
+    }
 
     public Schedule(String airplaneId, AirplaneStatusFlag statusFlag, String airportId, Double inStatusSecs) {
         this.airplaneId = airplaneId;
@@ -33,20 +52,8 @@ public class Schedule implements Serializable {
         this.inStatusSecs = inStatusSecs;
     }
 
-    public String getAirplaneId() {
-        return airplaneId;
-    }
-
-    public AirplaneStatusFlag getStatusFlag() {
-        return statusFlag;
-    }
-
-    public String getAirportId() {
-        return airportId;
-    }
-
-    public Double getInStatusSecs() {
-        return inStatusSecs;
+    public void setScheduleId(Long scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
     public void setAirplaneId(String airplaneId) {
@@ -63,6 +70,30 @@ public class Schedule implements Serializable {
 
     public void setInStatusSecs(Double inStatusSecs) {
         this.inStatusSecs = inStatusSecs;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Long getScheduleId() {
+        return scheduleId;
+    }
+
+    public String getAirplaneId() {
+        return airplaneId;
+    }
+
+    public AirplaneStatusFlag getStatusFlag() {
+        return statusFlag;
+    }
+
+    public String getAirportId() {
+        return airportId;
+    }
+
+    public Double getInStatusSecs() {
+        return inStatusSecs;
     }
 
 }

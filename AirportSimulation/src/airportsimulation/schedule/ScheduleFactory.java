@@ -11,17 +11,17 @@
 package airportsimulation.schedule;
 
 import airportsimulation.airplane.AirplaneStatusFlag;
-import airportsimulation.utils.Factory;
+import airportsimulation.utils.HibernatePersistFactory;
 import java.util.List;
 
 /**
  *
  * @author mdhtr
  */
-public class ScheduleFactory implements Factory<Schedule>{
+public class ScheduleFactory extends HibernatePersistFactory<Schedule> {
 
     @Override
-    public Schedule create(List<String> fields) {
+    public Schedule doCreate(List<String> fields) {
 
         return new Schedule(fields.get(0), AirplaneStatusFlag.valueOf(fields.get(1)),
                 fields.get(2), Double.parseDouble(fields.get(3)));}

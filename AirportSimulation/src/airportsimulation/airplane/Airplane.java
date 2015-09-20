@@ -6,32 +6,52 @@
 package airportsimulation.airplane;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
  * @author tothm
  */
+@Entity
+@Table(name = "airplane")
 public class Airplane implements Serializable {
 
     private static final long serialVersionUID = -5383070425270085876L;
 
+    @Id
+    @Column(name = "id")
     private String id;
+    @Column(name = "alias_name")
     private String aliasName;
+    @Column(name = "aircraft_type")
     private String aircraftType;
+    @Column(name = "fuel_tank_capacity")
     private Double fuelTankCapacity;
+    @Column(name = "actual_fuel_level")
     private Double actFuelLevel;
+    @Column(name = "max_speed")
     private Double maxSpeed;
+    @Column(name = "max_range")
     private Double maxRange;
+    @Column(name = "min_speed")
     private Double minSpeed;
-    private AirplaneStatusFlag State;
+    @Column(name = "state_flag")
+    private AirplaneStatusFlag stateFlag;
+    @Column(name = "act_altitude")
     private Double actAltitude;
+    @Column(name = "maintenance")
     private int Maintenance;
+    @Column(name = "max_passangers")
     private int maxPassangers;
+    @Column(name = "act_passangers")
     private int actPassangers;
+    @Column(name = "weight")
     private int Weight;
+    @Column(name = "max_take_off_weight")
     private int maxTakeoffWeight;
+    @Column(name = "max_landing_speed")
     private int maxLandingWeight;
-
+    @Column(name = "consumption")
     private Double consumption = 10.0d;
 
     public Airplane() {
@@ -58,7 +78,7 @@ public class Airplane implements Serializable {
         this.maxSpeed = maxSpeed;
         this.maxRange = maxRange;
         //this.minSpeed = minSpeed;
-        this.State = State;
+        this.stateFlag = State;
         this.actAltitude = actAltitude;
         this.Maintenance = Maintenance;
         this.maxPassangers = maxPassangers;
@@ -141,11 +161,11 @@ public class Airplane implements Serializable {
     }
 
     public AirplaneStatusFlag getState() {
-        return State;
+        return stateFlag;
     }
 
     public void setState(AirplaneStatusFlag State) {
-        this.State = State;
+        this.stateFlag = State;
     }
 
     public Double getActAltitude() {
@@ -206,7 +226,7 @@ public class Airplane implements Serializable {
 
     @Override
     public String toString() {
-        return id + " in: " + State.toString() + " (fuel: " + actFuelLevel + ")";
+        return id + " in: " + stateFlag.toString() + " (fuel: " + actFuelLevel + ")";
     }
 
 }

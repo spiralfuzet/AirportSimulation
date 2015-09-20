@@ -89,30 +89,30 @@
         <delete dir="${build.report.cobertura.dir}" />
         <mkdir dir="${build.instrumented.dir}" />
         <mkdir dir="${build.report.cobertura.dir}" />
-        <cobertura-instrument todir="${build.instrumented.dir}">
+        <!--cobertura-instrument todir="${build.instrumented.dir}">
             <fileset dir="${build.classes.dir}">
                 <include name="**/*.class"/>
                 <exclude name="**/*Test.class"/>
                 <exclude name="**/*Frame.class"/>
                 <exclude name="**/*Frame*.class"/>
             </fileset>
-        </cobertura-instrument>
+        </cobertura-instrument-->
     </target>
 
     <target name="-post-test-run" depends="-do-test-run">
         <!-- You can disable the html portion if you are using the hudson plugin and rely on the xml -->
-        <cobertura-report format="html" srcdir="${src.dir}" destdir="${build.report.cobertura.dir}">
+        <!--cobertura-report format="html" srcdir="${src.dir}" destdir="${build.report.cobertura.dir}">
             <fileset dir="${src.dir}">
                 <include name="**/*.java"/>
             </fileset>
-        </cobertura-report>
+        </cobertura-report-->
         <!-- Used by the hudson plug-in -->
-        <cobertura-report format="xml" srcdir="${src.dir}" destdir="${build.report.cobertura.dir}">
+        <!--cobertura-report format="xml" srcdir="${src.dir}" destdir="${build.report.cobertura.dir}">
             <fileset dir="${src.dir}">
                 <include name="**/*.java"/>
             </fileset>
         </cobertura-report>
-        <delete file="cobertura.ser" />
+        <delete file="cobertura.ser" /-->
     </target>
 
     <target depends="init,compile-test-single" name="run-test-with-main">
